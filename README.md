@@ -1,11 +1,13 @@
-whipper snipper allows you to create actions for
+# About Whipper Snipper
 
-- services [stop/start/diable]
-- hardware [enable/disable]
-- processes [start/kill]
-- executable [start/kill]
-- (sub profiles)
+Whipper Snipper is a standalone Windows application that allows you to create 'actions' for:
 
-actions are contained in a a profile, profiles can be either run or reverted
+- Services [stop/start/diable]
+- Hardware [enable/disable]
+- Processes [start/kill]
+- Executable [start/kill]
+- (Sub Profiles)
 
-shortcuts for a profile can be created for each action (run/rever)
+Actions are contained in a a Profile, Profiles can be either run or reverted
+
+Shortcuts for a profile can be created for each action (run/revert)
