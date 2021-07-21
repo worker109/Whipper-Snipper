@@ -7,3 +7,5 @@ whipper snipper allows you to create actions for
 - (sub profiles)
 
 actions are contained in a a profile, profiles can be either run or reverted
+
+shortcuts for a profile can be created for each action (run/rever)
