@@ -8,12 +8,16 @@ Whipper Snipper is a standalone Windows application that allows you to create ac
 - Executable [start/kill]
 - (Sub Profiles)
 
-Actions are contained in a a Profile, Profiles can be either run or reverted
+Actions are contained within a Profile, Profiles can be either run or reverted.
 
-Shortcuts for a profile can be created for each action (run/revert)
+Shortcuts can be created for each Profile (run/revert).
 
 ## Download and Installation
 
-Whipper Snipper is portable and doesn't use an installer
+Whipper Snipper is portable and doesn't use an installer.
 
 [Download Version 1.0 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.0/WhipperSnipper.exe)
+
+## Warning
+
+This application requires administrator privliges. You can break things with it.
