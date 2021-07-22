@@ -20,4 +20,4 @@ Whipper Snipper is portable and doesn't use an installer.
 
 ## Warning
 
-This application requires administrator privliges. You can break things with it.
+This application requires administrator privileges. You can break things with it.
