@@ -1,6 +1,6 @@
 ## About Whipper Snipper
 
-Whipper Snipper is a standalone Windows application that allows you to create 'actions' for:
+Whipper Snipper is a standalone Windows application that allows you to create actions for:
 
 - Services [stop/start/diable]
 - Hardware [enable/disable]
