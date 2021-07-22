@@ -6,128 +6,125 @@ using Whipper_Snipper.Properties;
 
 namespace Whipper_Snipper
 {
-  public class ActionExecutableForm : Form
-  {
-    private Profile profile;
-    private ActionExecutable actionexecutable;
-    private bool new_actionexecutable;
-    private IContainer components;
-    private TextBox txtFriendlyName;
-    private Label label1;
-    private TextBox txtExecutablePath;
-    private Label label3;
-    private Button btnDelete;
-    private Button btnSave;
-    private Button btnCancel;
-    private Label label6;
-    private ComboBox cboRevertAction;
-    private Label label7;
+    public class ActionExecutableForm : Form
+    {
+        private Profile profile;
+        private ActionExecutable actionexecutable;
+        private bool new_actionexecutable;
+        private IContainer components;
+        private TextBox txtFriendlyName;
+        private Label label1;
+        private TextBox txtExecutablePath;
+        private Label label3;
+        private Button btnDelete;
+        private Button btnSave;
+        private Button btnCancel;
+        private Label label6;
+        private ComboBox cboRevertAction;
+        private Label label7;
         private LinkLabel lnkBrowse;
         private OpenFileDialog openFileDialog1;
         private ComboBox cboEnableAction;
 
-    public ActionExecutableForm(Profile profile, ActionExecutable actionexecutable)
-    {
-      this.InitializeComponent();
-      this.new_actionexecutable = false;
-      this.profile = profile;
-      this.actionexecutable = actionexecutable;
-      this.Text = "Edit Executable Action";
-    }
-
-    public ActionExecutableForm(Profile profile)
-    {
-      this.InitializeComponent();
-      this.Text = "New Executable Action";
-      this.new_actionexecutable = true;
-      this.actionexecutable = new ActionExecutable();
-      this.profile = profile;
-    }
-
-    private void ActionExecutableForm_Load(object sender, EventArgs e)
-    {
-      this.Icon = Resources.icon_executable_icon;
-      this.FormBorderStyle = FormBorderStyle.FixedSingle;
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
-      if (this.new_actionexecutable)
-        this.btnDelete.Enabled = false;
-      this.txtFriendlyName.Text = this.actionexecutable.friendlyname;
-      //this.cboExecutableName.Items.Clear();
-      //foreach (object executable in Program.executablecontroller.getExecutableList(this.profile, this.actionexecutable.executableinfo))
-      //  this.cboExecutableName.Items.Add(executable);
-      //this.cboExecutableName.Text = this.actionexecutable.executableinfo.exename;
-      this.txtExecutablePath.Text = this.actionexecutable.executableinfo.exepath;
-      this.cboEnableAction.Items.Clear();
-      this.cboEnableAction.Items.Add((object) "Kill");
-      this.cboEnableAction.Items.Add((object) "Start");
-      this.cboEnableAction.Items.Add((object) "(no action)");
-      this.cboEnableAction.SelectedItem = this.actionexecutable.action_enable;
-      this.cboRevertAction.Items.Clear();
-      this.cboRevertAction.Items.Add((object) "Kill");
-      this.cboRevertAction.Items.Add((object) "Start");
-      this.cboRevertAction.Items.Add((object) "(no action)");
-      this.cboRevertAction.SelectedItem = (object) this.actionexecutable.action_revert;
-    }
-
-    private void btnSave_Click_1(object sender, EventArgs e)
-    {
-      string text = "";
-      //if (this.cboExecutableName.Text.Trim() == "")
-      //  text += "Enter an executable\n";
-      if (this.txtExecutablePath.Text.Trim() == "")
-        text += "Enter an executable path\n";
-      if (this.cboEnableAction.SelectedIndex == -1)
-        text += "Choose an enable action\n";
-      if (this.cboRevertAction.SelectedIndex == -1)
-        text += "Choose a revert action\n";
-      if (string.IsNullOrEmpty(text))
-      {
-        this.actionexecutable.friendlyname = this.txtFriendlyName.Text.Trim();
-        //this.actionexecutable.executableinfo.exename = this.cboExecutableName.Text.Trim();
-        this.actionexecutable.executableinfo.exepath = this.txtExecutablePath.Text.Trim();
-        this.actionexecutable.action_enable = this.cboEnableAction.Text;
-        this.actionexecutable.action_revert = this.cboRevertAction.Text;
-        if (this.new_actionexecutable)
+        public ActionExecutableForm(Profile profile, ActionExecutable actionexecutable)
         {
-          this.profile.addActionItem((Action) this.actionexecutable);
-          Program.writeLog("Adding executable action \"" + this.actionexecutable.getDispalyName() + "\"");
-          Program.mainform.updateAfterSaveDelete();
+            this.InitializeComponent();
+            this.new_actionexecutable = false;
+            this.profile = profile;
+            this.actionexecutable = actionexecutable;
+            this.Text = "Edit Executable Action";
         }
-        else
+
+        public ActionExecutableForm(Profile profile)
         {
-          Program.writeLog("Updating executable action \"" + this.actionexecutable.getDispalyName() + "\"");
-          Program.mainform.updateAfterSaveDelete();
+            this.InitializeComponent();
+            this.Text = "New Executable Action";
+            this.new_actionexecutable = true;
+            this.actionexecutable = new ActionExecutable();
+            this.profile = profile;
         }
-        this.Close();
-      }
-      else
-      {
-        int num = (int) MessageBox.Show(text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-      }
-    }
 
-    private void btnCancel_Click(object sender, EventArgs e) => this.Close();
+        private void ActionExecutableForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Resources.icon_executable_icon;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            if (this.new_actionexecutable)
+            this.btnDelete.Enabled = false;
+            this.txtFriendlyName.Text = this.actionexecutable.friendlyname;      
+            this.txtExecutablePath.Text = this.actionexecutable.executableinfo.exepath;
+            this.cboEnableAction.Items.Clear();
+            this.cboEnableAction.Items.Add((object) "Kill");
+            this.cboEnableAction.Items.Add((object) "Start");
+            this.cboEnableAction.Items.Add((object) "(no action)");
+            this.cboEnableAction.SelectedItem = this.actionexecutable.action_enable;
+            this.cboRevertAction.Items.Clear();
+            this.cboRevertAction.Items.Add((object) "Kill");
+            this.cboRevertAction.Items.Add((object) "Start");
+            this.cboRevertAction.Items.Add((object) "(no action)");
+            this.cboRevertAction.SelectedItem = (object) this.actionexecutable.action_revert;
+        }
 
-    private void btnDelete_Click_1(object sender, EventArgs e)
-    {
-      if (DialogResult.Yes != MessageBox.Show("Delete executable action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
-        return;
-      this.profile.removeAction((Action) this.actionexecutable);
-      Program.mainform.updateAfterSaveDelete();
-      this.Close();
-    }
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+            string text = "";
+            //if (this.cboExecutableName.Text.Trim() == "")
+            //  text += "Enter an executable\n";
+            if (this.txtExecutablePath.Text.Trim() == "")
+            text += "Enter an executable path\n";
+            if (this.cboEnableAction.SelectedIndex == -1)
+            text += "Choose an enable action\n";
+            if (this.cboRevertAction.SelectedIndex == -1)
+            text += "Choose a revert action\n";
+            if (string.IsNullOrEmpty(text))
+            {
+
+                this.actionexecutable.friendlyname = this.txtFriendlyName.Text.Trim();
+                //this.actionexecutable.executableinfo.exename = this.cboExecutableName.Text.Trim();
+                this.actionexecutable.executableinfo.exepath = this.txtExecutablePath.Text.Trim();
+                this.actionexecutable.action_enable = this.cboEnableAction.Text;
+                this.actionexecutable.action_revert = this.cboRevertAction.Text;
+                if (this.new_actionexecutable)
+                {
+                    this.profile.addActionItem((Action) this.actionexecutable);
+                    Program.writeLog("Adding executable action \"" + this.actionexecutable.getDispalyName() + "\"");
+                    Program.mainform.updateAfterSaveDelete();
+                }
+                else
+                {
+                    Program.writeLog("Updating executable action \"" + this.actionexecutable.getDispalyName() + "\"");
+                    Program.mainform.updateAfterSaveDelete();
+                }
+                this.Close();
+            }
+            else
+            {
+                int num = (int) MessageBox.Show(text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e) => this.Close();
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Delete executable action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            return;
+            this.profile.removeAction((Action) this.actionexecutable);
+            Program.mainform.updateAfterSaveDelete();
+            this.Close();
+        }
            
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            this.components.Dispose();
+            base.Dispose(disposing);
+        }
 
-    private void InitializeComponent()
-    {
+        private void InitializeComponent()
+        {
             this.label6 = new System.Windows.Forms.Label();
             this.cboRevertAction = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -283,17 +280,17 @@ namespace Whipper_Snipper
             this.ResumeLayout(false);
             this.PerformLayout();
 
-    }
+            }   
 
-        private void lnkBrowse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-            txtExecutablePath.Text = openFileDialog1.FileName;
+            private void lnkBrowse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            {
+                openFileDialog1.ShowDialog();
+                txtExecutablePath.Text = openFileDialog1.FileName;
+            }
+
+            private void cboEnableAction_SelectedIndexChanged(object sender, EventArgs e)
+            {
+
+            }
         }
-
-        private void cboEnableAction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
 }
