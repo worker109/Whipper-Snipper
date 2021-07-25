@@ -22,7 +22,7 @@ Whipper Snipper is portable* and doesn't use an installer.
 
 [Download Version 1.1 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.1/WhipperSnipper.exe)
 
-* *If you use shortcuts generated from Whipper Snipper, put the application somewhere permanent*
+** *If you use shortcuts generated from Whipper Snipper, put the application somewhere permanent*
 
 # Examples
 
