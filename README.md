@@ -16,7 +16,7 @@ Shortcuts can be created for each Profile (run/revert).
 
 Whipper Snipper is portable and doesn't use an installer.
 
-[Download Version 1.0 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.0/WhipperSnipper.exe)
+[Download Version 1.1 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.1/WhipperSnipper.exe)
 
 ## Warning
 
