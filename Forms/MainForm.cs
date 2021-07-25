@@ -1,6 +1,7 @@
 ﻿using IWshRuntimeLibrary;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -8,624 +9,631 @@ using Whipper_Snipper.Properties;
 
 namespace Whipper_Snipper
 {
-  public class MainForm : Form
-  {
-    public static ImageList icons;
-    private TreeNode contextselectednode;
-    private TreeNode toolstripselectednode;
-    private IContainer components;
-    private SplitContainer splitContainer1;
-    private TreeView treeProfiles;
-    private RichTextBox txtLog;
-    private ContextMenuStrip context_profile;
-    private ContextMenuStrip context_action;
-    private ContextMenuStrip context_log;
-    private ToolStripMenuItem clearLogToolStripMenuItem;
-    private ToolStripMenuItem runProfileToolStripMenuItem;
-    private ToolStripMenuItem revertProfileToolStripMenuItem;
-    private ToolStripSeparator toolStripSeparator1;
-    private ToolStripMenuItem addNewActionToolStripMenuItem;
-    private ToolStripSeparator toolStripSeparator2;
-    private ToolStripMenuItem deleteProfileToolStripMenuItem;
-    private ToolStripMenuItem pROFILENAMEToolStripMenuItem;
-    private ToolStripSeparator toolStripSeparator3;
-    private ContextMenuStrip context_profileadd;
-    private ToolStripMenuItem addNewProfileToolStripMenuItem;
-    private SplitContainer splitContainer2;
-    private ToolStrip toolStrip;
-    private ToolStripMenuItem editProfileToolStripMenuItem;
-    private ToolStripMenuItem aCTIONNAMEToolStripMenuItem;
-    private ToolStripSeparator toolStripSeparator4;
-    private ToolStripMenuItem editActionToolStripMenuItem;
-    private ToolStripMenuItem deleteActionToolStripMenuItem;
-    private ToolStripMenuItem moveUpToolStripMenuItem;
-    private ToolStripMenuItem moveDownToolStripMenuItem;
-    private ToolStripSeparator toolStripSeparator5;
-    private ToolStripLabel lblProfile;
-    private ToolStripButton btnProfileRun;
-    private ToolStripButton btnProfileRevert;
-    private ToolStripButton btnProfileEdit;
-    private ToolStripButton btnProfileAdd;
-    private ToolStripButton btnProfileDelete;
-    private ToolStripSeparator toolStripSeparator6;
-    private ToolStripLabel lblAction;
-    private ToolStripButton lblActionMoveUp;
-    private ToolStripButton lblActionMoveDown;
-    private ToolStripButton lblActionEdit;
-    private ToolStripButton lblActionDelete;
+    public class MainForm : Form
+    {
+        public static ImageList icons;
+        private TreeNode contextselectednode;
+        private TreeNode toolstripselectednode;
+        private IContainer components;
+        private SplitContainer splitContainer1;
+        private TreeView treeProfiles;
+        private RichTextBox txtLog;
+        private ContextMenuStrip context_profile;
+        private ContextMenuStrip context_action;
+        private ContextMenuStrip context_log;
+        private ToolStripMenuItem clearLogToolStripMenuItem;
+        private ToolStripMenuItem runProfileToolStripMenuItem;
+        private ToolStripMenuItem revertProfileToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem addNewActionToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem deleteProfileToolStripMenuItem;
+        private ToolStripMenuItem pROFILENAMEToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ContextMenuStrip context_profileadd;
+        private ToolStripMenuItem addNewProfileToolStripMenuItem;
+        private SplitContainer splitContainer2;
+        private ToolStrip toolStrip;
+        private ToolStripMenuItem editProfileToolStripMenuItem;
+        private ToolStripMenuItem aCTIONNAMEToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem editActionToolStripMenuItem;
+        private ToolStripMenuItem deleteActionToolStripMenuItem;
+        private ToolStripMenuItem moveUpToolStripMenuItem;
+        private ToolStripMenuItem moveDownToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripLabel lblProfile;
+        private ToolStripButton btnProfileRun;
+        private ToolStripButton btnProfileRevert;
+        private ToolStripButton btnProfileEdit;
+        private ToolStripButton btnProfileAdd;
+        private ToolStripButton btnProfileDelete;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripLabel lblAction;
+        private ToolStripButton lblActionMoveUp;
+        private ToolStripButton lblActionMoveDown;
+        private ToolStripButton lblActionEdit;
+        private ToolStripButton lblActionDelete;
         private ToolStripMenuItem createShortcutRunToolStripMenuItem;
         private ToolStripMenuItem createShortcutRevertToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator7;
-        private SaveFileDialog saveShortcutFileDialog;
         private ToolStripButton lblActionAdd;
 
-    public MainForm() => this.InitializeComponent();
+        public MainForm() => this.InitializeComponent();
 
-    private void MainForm_Load(object sender, EventArgs e)
-    {
-      this.Icon = Resources.wsicon;
-      Program.loadConfigurationFile();
-      Program.instantiateDevcon();
-      Program.instantiateServiceController();
-      Program.instantiateProcessController();
-      Program.instantiateExecutableController();
-      this.setupTree();
-      this.loadTree();
-    }
-
-    public void writeLogTextBox(string message, string textcolor = "Black")
-    {
-      message += "\n";
-      this.txtLog.SelectionStart = this.txtLog.TextLength;
-      this.txtLog.SelectionLength = 0;
-      this.txtLog.SelectionColor = Color.FromName(textcolor);
-      this.txtLog.AppendText(message);
-      this.txtLog.SelectionColor = Color.Black;
-      this.txtLog.ScrollToCaret();
-    }
-
-    private void setupTree()
-    {
-      MainForm.icons = new ImageList();
-      MainForm.icons.Images.Add("icon_add", (Image) Resources.icon_add);
-      MainForm.icons.Images.Add("icon_hardware", (Image) Resources.icon_hardware);
-      MainForm.icons.Images.Add("icon_process", (Image) Resources.icon_process);
-      MainForm.icons.Images.Add("icon_process", (Image)Resources.icon_process);
-      MainForm.icons.Images.Add("icon_executable", (Image) Resources.icon_executable);
-      MainForm.icons.Images.Add("icon_service", (Image) Resources.icon_service);
-      MainForm.icons.Images.Add("icon_add_small", (Image) Resources.icon_add_small);
-      MainForm.icons.Images.Add("icon_hardware_small", (Image) Resources.icon_hardware_small);
-      MainForm.icons.Images.Add("icon_process_small", (Image) Resources.icon_process_small);
-      MainForm.icons.Images.Add("icon_executable_small", (Image)Resources.icon_executable_small);
-      MainForm.icons.Images.Add("icon_profile_small", (Image) Resources.icon_profile_small);
-      MainForm.icons.Images.Add("icon_service_small", (Image) Resources.icon_service_small);
-      MainForm.icons.Images.Add("icon_delete_small", (Image) Resources.icon_delete_small);
-      MainForm.icons.Images.Add("icon_moveup_small", (Image) Resources.icon_moveup_small);
-      MainForm.icons.Images.Add("icon_movedown_small", (Image) Resources.icon_movedown_small);
-      MainForm.icons.Images.Add("icon_run_small", (Image) Resources.icon_run_small);
-      MainForm.icons.Images.Add("icon_revert_small", (Image) Resources.icon_revert_small);
-      this.treeProfiles.ImageList = MainForm.icons;
-    }
-
-    private void loadTree()
-    {
-      this.treeProfiles.Nodes.Clear();
-      foreach (Profile profile in Program.profilelist.profiles)
-      {
-        TreeNode node1 = new TreeNode()
+        private void MainForm_Load(object sender, EventArgs e)
         {
-          Tag = (object) profile,
-          Text = profile.getDispalyName()
-        };
-        node1.ImageKey = node1.SelectedImageKey = "icon_profile_small";
-        if (profile.getExpanded())
-          node1.Expand();
-        foreach (Action actionitem in profile.actionitems)
-        {
-          TreeNode node2 = new TreeNode();
-          node2.Tag = (object) actionitem;
-          node2.Text = actionitem.getDisplayName();
-          if (actionitem is ActionHardware)
-            node2.ImageKey = node2.SelectedImageKey = "icon_hardware_small";
-          if (actionitem is ActionService)
-            node2.ImageKey = node2.SelectedImageKey = "icon_service_small";
-          if (actionitem is ActionProcess)
-            node2.ImageKey = node2.SelectedImageKey = "icon_process_small";
-          if (actionitem is ActionExecutable)
-              node2.ImageKey = node2.SelectedImageKey = "icon_executable_small";
-          if (actionitem is ActionProfile)
-            node2.ImageKey = node2.SelectedImageKey = "icon_profile_small";
-          node1.Nodes.Add(node2);
+            System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+            this.Text += " " + fieVersionInfo.FileMajorPart.ToString() + "." + fieVersionInfo.FileMinorPart.ToString();
+            this.Icon = Resources.wsicon;
+            Program.loadConfigurationFile();
+            Program.instantiateDevcon();
+            Program.instantiateServiceController();
+            Program.instantiateProcessController();
+            Program.instantiateExecutableController();
+            this.setupTree();
+            this.loadTree();
         }
-        this.treeProfiles.Nodes.Add(node1);
-      }
-    }
 
-    private void treeProfiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-    {
-      if (e.Button != MouseButtons.Left || e.Node.Tag != null && e.Node.Tag is Profile || (e.Node.Tag != null && e.Node.Tag is ActionHardware || e.Node.Tag != null && e.Node.Tag is ActionService) || (e.Node.Tag != null && e.Node.Tag is ActionProcess || e.Node.Tag == null))
-        return;
-      ActionProfile tag = e.Node.Tag as ActionProfile;
-    }
-
-    public void loadProfileForm(Profile profile = null)
-    {
-      int num = (int) (profile != null ? (Form) new ProfileForm(profile) : (Form) new ProfileForm()).ShowDialog();
-    }
-
-    public void loadActionPickerForm(Profile profile)
-    {
-      int num = (int) new ActionPickerForm(profile).ShowDialog();
-    }
-
-    public void loadActionHardwareForm(Profile profile, ActionHardware actionhardware = null)
-    {
-      int num = (int) (actionhardware != null ? (Form) new ActionHardwareForm(profile, actionhardware) : (Form) new ActionHardwareForm(profile)).ShowDialog();
-    }
-
-    public void loadActionServiceForm(Profile profile, ActionService actionservice = null)
-    {
-      int num = (int) (actionservice != null ? (Form) new ActionServiceForm(profile, actionservice) : (Form) new ActionServiceForm(profile)).ShowDialog();
-    }
-
-    public void loadActionProcessForm(Profile profile, ActionProcess actionprocess = null)
-    {
-      int num = (int) (actionprocess != null ? (Form) new ActionProcessForm(profile, actionprocess) : (Form) new ActionProcessForm(profile)).ShowDialog();
-    }
-
-    public void loadActionExecutableForm(Profile profile, ActionExecutable actionexecutable = null)
-    {
-        int num = (int)(actionexecutable != null ? (Form)new ActionExecutableForm(profile, actionexecutable) : (Form)new ActionExecutableForm(profile)).ShowDialog();
-    }
-
-        public void loadActionProfileForm(Profile profile, ActionProfile actionprofile = null)
-    {
-      int num = (int) (actionprofile != null ? (Form) new ActionProfileForm(profile, actionprofile) : (Form) new ActionProfileForm(profile)).ShowDialog();
-    }
-
-    public void updateAfterSaveDelete()
-    {
-      Program.saveConfigurationFile();
-      this.loadTree();
-    }
-
-    private void treeProfiles_AfterCollapse(object sender, TreeViewEventArgs e)
-    {
-      if (e.Node.Tag == null || !(e.Node.Tag is Profile))
-        return;
-      ((Profile) e.Node.Tag).setExpanded(false);
-    }
-
-    private void treeProfiles_AfterExpand(object sender, TreeViewEventArgs e)
-    {
-      if (e.Node.Tag == null || !(e.Node.Tag is Profile))
-        return;
-      ((Profile) e.Node.Tag).setExpanded(true);
-    }
-
-    private void treeProfiles_KeyUp(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Delete)
-      {
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
+        public void writeLogTextBox(string message, string textcolor = "Black")
         {
-          Profile tag = (Profile) this.treeProfiles.SelectedNode.Tag;
-          Program.profilelist.removeProfile(tag);
-          Program.mainform.updateAfterSaveDelete();
+            message += "\n";
+            this.txtLog.SelectionStart = this.txtLog.TextLength;
+            this.txtLog.SelectionLength = 0;
+            this.txtLog.SelectionColor = Color.FromName(textcolor);
+            this.txtLog.AppendText(message);
+            this.txtLog.SelectionColor = Color.Black;
+            this.txtLog.ScrollToCaret();
         }
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionHardware)
+
+        private void setupTree()
         {
-          ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
-          Program.mainform.updateAfterSaveDelete();
+            MainForm.icons = new ImageList();
+            MainForm.icons.Images.Add("icon_add", (Image) Resources.icon_add);
+            MainForm.icons.Images.Add("icon_hardware", (Image) Resources.icon_hardware);
+            MainForm.icons.Images.Add("icon_process", (Image) Resources.icon_process);
+            MainForm.icons.Images.Add("icon_process", (Image)Resources.icon_process);
+            MainForm.icons.Images.Add("icon_executable", (Image) Resources.icon_executable);
+            MainForm.icons.Images.Add("icon_service", (Image) Resources.icon_service);
+            MainForm.icons.Images.Add("icon_add_small", (Image) Resources.icon_add_small);
+            MainForm.icons.Images.Add("icon_hardware_small", (Image) Resources.icon_hardware_small);
+            MainForm.icons.Images.Add("icon_process_small", (Image) Resources.icon_process_small);
+            MainForm.icons.Images.Add("icon_executable_small", (Image)Resources.icon_executable_small);
+            MainForm.icons.Images.Add("icon_profile_small", (Image) Resources.icon_profile_small);
+            MainForm.icons.Images.Add("icon_service_small", (Image) Resources.icon_service_small);
+            MainForm.icons.Images.Add("icon_delete_small", (Image) Resources.icon_delete_small);
+            MainForm.icons.Images.Add("icon_moveup_small", (Image) Resources.icon_moveup_small);
+            MainForm.icons.Images.Add("icon_movedown_small", (Image) Resources.icon_movedown_small);
+            MainForm.icons.Images.Add("icon_run_small", (Image) Resources.icon_run_small);
+            MainForm.icons.Images.Add("icon_revert_small", (Image) Resources.icon_revert_small);
+            this.treeProfiles.ImageList = MainForm.icons;
         }
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionService)
+
+        private void loadTree()
         {
-          ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
-          Program.mainform.updateAfterSaveDelete();
+            this.treeProfiles.Nodes.Clear();
+            foreach (Profile profile in Program.profilelist.profiles)
+            {
+            TreeNode node1 = new TreeNode()
+            {
+                Tag = (object) profile,
+                Text = profile.getDispalyName()
+            };
+            node1.ImageKey = node1.SelectedImageKey = "icon_profile_small";
+            if (profile.getExpanded())
+                node1.Expand();
+            foreach (Action actionitem in profile.actionitems)
+            {
+                TreeNode node2 = new TreeNode();
+                node2.Tag = (object) actionitem;
+                node2.Text = actionitem.getDisplayName();
+                if (actionitem is ActionHardware)
+                node2.ImageKey = node2.SelectedImageKey = "icon_hardware_small";
+                if (actionitem is ActionService)
+                node2.ImageKey = node2.SelectedImageKey = "icon_service_small";
+                if (actionitem is ActionProcess)
+                node2.ImageKey = node2.SelectedImageKey = "icon_process_small";
+                if (actionitem is ActionExecutable)
+                    node2.ImageKey = node2.SelectedImageKey = "icon_executable_small";
+                if (actionitem is ActionProfile)
+                node2.ImageKey = node2.SelectedImageKey = "icon_profile_small";
+                node1.Nodes.Add(node2);
+            }
+            this.treeProfiles.Nodes.Add(node1);
+            }
         }
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProcess)
+
+        private void treeProfiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-          ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
-          Program.mainform.updateAfterSaveDelete();
+            if (e.Button != MouseButtons.Left || e.Node.Tag != null && e.Node.Tag is Profile || (e.Node.Tag != null && e.Node.Tag is ActionHardware || e.Node.Tag != null && e.Node.Tag is ActionService) || (e.Node.Tag != null && e.Node.Tag is ActionProcess || e.Node.Tag == null))
+            return;
+            ActionProfile tag = e.Node.Tag as ActionProfile;
         }
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionExecutable)
+
+        public void loadProfileForm(Profile profile = null)
         {
-            ((Profile)this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action)this.treeProfiles.SelectedNode.Tag);
+            int num = (int) (profile != null ? (Form) new ProfileForm(profile) : (Form) new ProfileForm()).ShowDialog();
+        }
+
+        public void loadProfileShortcutForm(Profile profile,bool run)
+        {
+            int num = (int)((Form)new ProfileShortcutForm(profile,run)).ShowDialog();
+        }
+
+        public void loadActionPickerForm(Profile profile)
+        {
+            int num = (int) new ActionPickerForm(profile).ShowDialog();
+        }
+
+        public void loadActionHardwareForm(Profile profile, ActionHardware actionhardware = null)
+        {
+            int num = (int) (actionhardware != null ? (Form) new ActionHardwareForm(profile, actionhardware) : (Form) new ActionHardwareForm(profile)).ShowDialog();
+        }
+
+        public void loadActionServiceForm(Profile profile, ActionService actionservice = null)
+        {
+            int num = (int) (actionservice != null ? (Form) new ActionServiceForm(profile, actionservice) : (Form) new ActionServiceForm(profile)).ShowDialog();
+        }
+
+        public void loadActionProcessForm(Profile profile, ActionProcess actionprocess = null)
+        {
+            int num = (int) (actionprocess != null ? (Form) new ActionProcessForm(profile, actionprocess) : (Form) new ActionProcessForm(profile)).ShowDialog();
+        }
+
+        public void loadActionExecutableForm(Profile profile, ActionExecutable actionexecutable = null)
+        {
+            int num = (int)(actionexecutable != null ? (Form)new ActionExecutableForm(profile, actionexecutable) : (Form)new ActionExecutableForm(profile)).ShowDialog();
+        }
+
+            public void loadActionProfileForm(Profile profile, ActionProfile actionprofile = null)
+        {
+            int num = (int) (actionprofile != null ? (Form) new ActionProfileForm(profile, actionprofile) : (Form) new ActionProfileForm(profile)).ShowDialog();
+        }
+
+        public void updateAfterSaveDelete()
+        {
+            Program.saveConfigurationFile();
+            this.loadTree();
+        }
+
+        private void treeProfiles_AfterCollapse(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Tag == null || !(e.Node.Tag is Profile))
+            return;
+            ((Profile) e.Node.Tag).setExpanded(false);
+        }
+
+        private void treeProfiles_AfterExpand(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Tag == null || !(e.Node.Tag is Profile))
+            return;
+            ((Profile) e.Node.Tag).setExpanded(true);
+        }
+
+        private void treeProfiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
+            {
+                Profile tag = (Profile) this.treeProfiles.SelectedNode.Tag;
+                Program.profilelist.removeProfile(tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionHardware)
+            {
+                ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionService)
+            {
+                ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProcess)
+            {
+                ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionExecutable)
+            {
+                ((Profile)this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action)this.treeProfiles.SelectedNode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProfile)
+            {
+                ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            }
+            if (this.treeProfiles.SelectedNode != null)
+            return;
+            this.resetToolStrip();
+        }
+
+        private void clearLogToolStripMenuItem_Click(object sender, EventArgs e) => this.txtLog.Text = "";
+
+        private void runProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Profile tag = (Profile) this.contextselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.contextselectednode;
+            tag.run();
+        }
+
+        private void revertProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Profile tag = (Profile) this.contextselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.contextselectednode;
+            tag.revert();
+        }
+
+        private void addNewActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Profile tag = (Profile) this.contextselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.contextselectednode;
+            this.loadActionPickerForm(tag);
+        }
+
+        private void deleteProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Delete profile?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            return;
+            Profile tag = (Profile) this.contextselectednode.Tag;
+            Program.profilelist.removeProfile(tag);
             Program.mainform.updateAfterSaveDelete();
         }
-        if (this.treeProfiles.SelectedNode != null && this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProfile)
+
+        private void editProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          ((Profile) this.treeProfiles.SelectedNode.Parent.Tag).removeAction((Action) this.treeProfiles.SelectedNode.Tag);
-          Program.mainform.updateAfterSaveDelete();
+            Profile tag = (Profile) this.contextselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.contextselectednode;
+            this.loadProfileForm(tag);
         }
-      }
-      if (this.treeProfiles.SelectedNode != null)
-        return;
-      this.resetToolStrip();
-    }
 
-    private void clearLogToolStripMenuItem_Click(object sender, EventArgs e) => this.txtLog.Text = "";
-
-    private void runProfileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.contextselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.contextselectednode;
-      tag.run();
-    }
-
-    private void revertProfileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.contextselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.contextselectednode;
-      tag.revert();
-    }
-
-    private void addNewActionToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.contextselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.contextselectednode;
-      this.loadActionPickerForm(tag);
-    }
-
-    private void deleteProfileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      if (DialogResult.Yes != MessageBox.Show("Delete profile?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
-        return;
-      Profile tag = (Profile) this.contextselectednode.Tag;
-      Program.profilelist.removeProfile(tag);
-      Program.mainform.updateAfterSaveDelete();
-    }
-
-    private void editProfileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.contextselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.contextselectednode;
-      this.loadProfileForm(tag);
-    }
-
-    private void treeProfiles_MouseUp(object sender, MouseEventArgs e)
-    {
-      this.treeProfiles.SelectedNode = (TreeNode) null;
-      if (e.Button == MouseButtons.Right)
-      {
-        Point point = new Point(e.X, e.Y);
-        this.contextselectednode = this.treeProfiles.GetNodeAt(point);
-        if (this.contextselectednode != null)
+        private void treeProfiles_MouseUp(object sender, MouseEventArgs e)
         {
-          if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is Profile)
-          {
-            this.pROFILENAMEToolStripMenuItem.Text = ((Profile) this.contextselectednode.Tag).getDispalyName();
-            this.context_profile.Show((Control) this.treeProfiles, point);
-          }
-          else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is Action)
-          {
-            this.aCTIONNAMEToolStripMenuItem.Text = ((Action) this.contextselectednode.Tag).getDisplayName();
-            this.context_action.Show((Control) this.treeProfiles, point);
-          }
+            this.treeProfiles.SelectedNode = (TreeNode) null;
+            if (e.Button == MouseButtons.Right)
+            {
+            Point point = new Point(e.X, e.Y);
+            this.contextselectednode = this.treeProfiles.GetNodeAt(point);
+            if (this.contextselectednode != null)
+            {
+                if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is Profile)
+                {
+                this.pROFILENAMEToolStripMenuItem.Text = ((Profile) this.contextselectednode.Tag).getDispalyName();
+                this.context_profile.Show((Control) this.treeProfiles, point);
+                }
+                else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is Action)
+                {
+                this.aCTIONNAMEToolStripMenuItem.Text = ((Action) this.contextselectednode.Tag).getDisplayName();
+                this.context_action.Show((Control) this.treeProfiles, point);
+                }
+            }
+            else
+                this.context_profileadd.Show((Control) this.treeProfiles, point);
+            }
+            if (this.treeProfiles.SelectedNode != null)
+            return;
+            this.resetToolStrip();
         }
-        else
-          this.context_profileadd.Show((Control) this.treeProfiles, point);
-      }
-      if (this.treeProfiles.SelectedNode != null)
-        return;
-      this.resetToolStrip();
-    }
 
-    private void addNewProfileToolStripMenuItem_Click(object sender, EventArgs e) => this.loadProfileForm();
+        private void addNewProfileToolStripMenuItem_Click(object sender, EventArgs e) => this.loadProfileForm();
 
-    private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Action tag1 = (Action) this.contextselectednode.Tag;
-      Profile tag2 = (Profile) this.contextselectednode.Parent.Tag;
-      tag2.moveActionUp(tag1);
-      tag2.resetOrder();
-      Program.mainform.updateAfterSaveDelete();
-    }
-
-    private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Action tag1 = (Action) this.contextselectednode.Tag;
-      Profile tag2 = (Profile) this.contextselectednode.Parent.Tag;
-      tag2.moveActionDown(tag1);
-      tag2.resetOrder();
-      Program.mainform.updateAfterSaveDelete();
-    }
-
-    private void editActionToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionHardware)
-        this.loadActionHardwareForm((Profile) this.contextselectednode.Parent.Tag, (ActionHardware) this.contextselectednode.Tag);
-      else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionService)
-        this.loadActionServiceForm((Profile) this.contextselectednode.Parent.Tag, (ActionService) this.contextselectednode.Tag);
-      else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionProcess)
-      {
-        this.loadActionProcessForm((Profile) this.contextselectednode.Parent.Tag, (ActionProcess) this.contextselectednode.Tag);
-      }
-      else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionExecutable)
-      {
-        this.loadActionExecutableForm((Profile)this.contextselectednode.Parent.Tag, (ActionExecutable)this.contextselectednode.Tag);
-      }
-      else
-      {
-        if (this.contextselectednode.Tag == null || !(this.contextselectednode.Tag is ActionProfile))
-          return;
-        this.loadActionProfileForm((Profile) this.contextselectednode.Parent.Tag, (ActionProfile) this.contextselectednode.Tag);
-      }
-    }
-
-    private void deleteActionToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      if (DialogResult.Yes != MessageBox.Show("Delete action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
-        return;
-      if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionHardware)
-      {
-        ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionService)
-      {
-        ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionProcess)
-      {
-        ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionExecutable)
-      {
-        ((Profile)this.contextselectednode.Parent.Tag).removeAction((Action)this.contextselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.contextselectednode.Tag == null || !(this.contextselectednode.Tag is ActionProfile))
-        return;
-      ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
-      Program.mainform.updateAfterSaveDelete();
-    }
-
-    private void treeProfiles_AfterSelect(object sender, TreeViewEventArgs e)
-    {
-      this.toolstripselectednode = this.treeProfiles.SelectedNode;
-      this.resetToolStrip();
-      this.btnProfileAdd.Enabled = false;
-      if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
-      {
-        this.lblProfile.Enabled = true;
-        this.btnProfileRun.Enabled = true;
-        this.btnProfileRevert.Enabled = true;
-        this.btnProfileEdit.Enabled = true;
-        this.btnProfileDelete.Enabled = true;
-        this.lblAction.Enabled = true;
-        this.lblActionAdd.Enabled = true;
-      }
-      else
-      {
-        if (this.treeProfiles.SelectedNode.Tag == null || !(this.treeProfiles.SelectedNode.Tag is Action))
-          return;
-        this.lblAction.Enabled = true;
-        this.lblActionMoveUp.Enabled = true;
-        this.lblActionMoveDown.Enabled = true;
-        this.lblActionEdit.Enabled = true;
-        this.lblActionDelete.Enabled = true;
-      }
-    }
-
-    private void resetToolStrip()
-    {
-      this.lblProfile.Enabled = true;
-      this.btnProfileAdd.Enabled = true;
-      this.btnProfileRun.Enabled = false;
-      this.btnProfileRevert.Enabled = false;
-      this.btnProfileEdit.Enabled = false;
-      this.btnProfileDelete.Enabled = false;
-      this.lblAction.Enabled = false;
-      this.lblActionAdd.Enabled = false;
-      this.lblActionMoveUp.Enabled = false;
-      this.lblActionMoveDown.Enabled = false;
-      this.lblActionEdit.Enabled = false;
-      this.lblActionDelete.Enabled = false;
-    }
-
-    private void treeProfiles_Leave(object sender, EventArgs e)
-    {
-      if (this.treeProfiles.SelectedNode != null)
-        return;
-      this.resetToolStrip();
-    }
-
-    private void treeProfiles_DoubleClick(object sender, EventArgs e)
-    {
-      if (this.treeProfiles.SelectedNode == null)
-        return;
-      if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
-        this.loadProfileForm((Profile) this.treeProfiles.SelectedNode.Tag);
-      else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionHardware)
-        this.loadActionHardwareForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionHardware) this.treeProfiles.SelectedNode.Tag);
-      else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionService)
-        this.loadActionServiceForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionService) this.treeProfiles.SelectedNode.Tag);
-      else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProcess)
-        this.loadActionProcessForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionProcess) this.treeProfiles.SelectedNode.Tag);
-      else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionExecutable)
-        this.loadActionExecutableForm((Profile)this.treeProfiles.SelectedNode.Parent.Tag, (ActionExecutable)this.treeProfiles.SelectedNode.Tag);
-      else
-      {
-        if (this.treeProfiles.SelectedNode.Tag == null || !(this.treeProfiles.SelectedNode.Tag is ActionProfile))
-          return;
-        this.loadActionProfileForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionProfile) this.treeProfiles.SelectedNode.Tag);
-      }
-    }
-
-    private void btnProfileAdd_Click(object sender, EventArgs e)
-    {
-      this.loadProfileForm();
-      this.resetToolStrip();
-    }
-
-    private void btnProfileRun_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.toolstripselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.toolstripselectednode;
-      tag.run();
-    }
-
-    private void btnProfileRevert_Click(object sender, EventArgs e)
-    {
-      Profile tag = (Profile) this.toolstripselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.toolstripselectednode;
-      tag.revert();
-    }
-
-    private void btnProfileEdit_Click(object sender, EventArgs e)
-    {
-      if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Profile))
-        return;
-      Profile tag = (Profile) this.toolstripselectednode.Tag;
-      this.loadProfileForm(tag);
-      this.setTreeSelectedProfile(tag);
-    }
-
-    private void btnProfileDelete_Click(object sender, EventArgs e)
-    {
-      if (DialogResult.Yes != MessageBox.Show("Delete profile?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
-        return;
-      Profile tag = (Profile) this.toolstripselectednode.Tag;
-      Program.profilelist.removeProfile(tag);
-      Program.mainform.updateAfterSaveDelete();
-      this.resetToolStrip();
-      this.setTreeSelectedProfile(tag);
-    }
-
-    private void lblActionAdd_Click(object sender, EventArgs e)
-    {
-      if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Profile))
-        return;
-      Profile tag = (Profile) this.toolstripselectednode.Tag;
-      this.treeProfiles.SelectedNode = this.contextselectednode;
-      this.loadActionPickerForm(tag);
-    }
-
-    private void lblActionMoveUp_Click(object sender, EventArgs e)
-    {
-      if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Action))
-        return;
-      Action tag1 = (Action) this.toolstripselectednode.Tag;
-      Profile tag2 = (Profile) this.toolstripselectednode.Parent.Tag;
-      tag2.moveActionUp(tag1);
-      tag2.resetOrder();
-      Program.mainform.updateAfterSaveDelete();
-      this.setTreeSelectedAction(tag1);
-    }
-
-    private void lblActionMoveDown_Click(object sender, EventArgs e)
-    {
-      if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Action))
-        return;
-      Action tag1 = (Action) this.toolstripselectednode.Tag;
-      Profile tag2 = (Profile) this.toolstripselectednode.Parent.Tag;
-      tag2.moveActionDown(tag1);
-      tag2.resetOrder();
-      Program.mainform.updateAfterSaveDelete();
-      this.setTreeSelectedAction(tag1);
-    }
-
-    private void lblActionEdit_Click(object sender, EventArgs e)
-    {
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionHardware)
-      {
-        ActionHardware tag = (ActionHardware) this.toolstripselectednode.Tag;
-        this.loadActionHardwareForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionHardware) this.toolstripselectednode.Tag);
-        this.setTreeSelectedAction((Action) tag);
-      }
-      else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionService)
-      {
-        ActionService tag = (ActionService) this.toolstripselectednode.Tag;
-        this.loadActionServiceForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionService) this.toolstripselectednode.Tag);
-        this.setTreeSelectedAction((Action) tag);
-      }
-      else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProcess)
-      {
-        ActionProcess tag = (ActionProcess) this.toolstripselectednode.Tag;
-        this.loadActionProcessForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionProcess) this.toolstripselectednode.Tag);
-        this.setTreeSelectedAction((Action) tag);
-      }
-      else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionExecutable)
-      {
-        ActionExecutable tag = (ActionExecutable)this.toolstripselectednode.Tag;
-        this.loadActionExecutableForm((Profile)this.toolstripselectednode.Parent.Tag, (ActionExecutable)this.toolstripselectednode.Tag);
-        this.setTreeSelectedAction((Action)tag);
-      }
-      else
-      {
-        if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is ActionProfile))
-          return;
-        ActionProfile tag = (ActionProfile) this.toolstripselectednode.Tag;
-        this.loadActionProfileForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionProfile) this.toolstripselectednode.Tag);
-        this.setTreeSelectedAction((Action) tag);
-      }
-    }
-
-    private void lblActionDelete_Click(object sender, EventArgs e)
-    {
-      if (DialogResult.Yes != MessageBox.Show("Delete action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
-        return;
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionHardware)
-      {
-        ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionService)
-      {
-        ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProcess)
-      {
-        ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionExecutable)
-      {
-         ((Profile)this.toolstripselectednode.Parent.Tag).removeAction((Action)this.toolstripselectednode.Tag);
-          Program.mainform.updateAfterSaveDelete();
-      }
-      if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProfile)
-      {
-        ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
-        Program.mainform.updateAfterSaveDelete();
-      }
-      this.resetToolStrip();
-    }
-
-    private void setTreeSelectedAction(Action action)
-    {
-      foreach (TreeNode node1 in this.treeProfiles.Nodes)
-      {
-        foreach (TreeNode node2 in node1.Nodes)
+        private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          if (node2.Tag == action)
-            this.treeProfiles.SelectedNode = node2;
+            Action tag1 = (Action) this.contextselectednode.Tag;
+            Profile tag2 = (Profile) this.contextselectednode.Parent.Tag;
+            tag2.moveActionUp(tag1);
+            tag2.resetOrder();
+            Program.mainform.updateAfterSaveDelete();
         }
-      }
-    }
 
-    public void setTreeSelectedProfile(Profile profile)
-    {
-      foreach (TreeNode node in this.treeProfiles.Nodes)
-      {
-        if (node.Tag == profile)
-          this.treeProfiles.SelectedNode = node;
-      }
-    }
+        private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Action tag1 = (Action) this.contextselectednode.Tag;
+            Profile tag2 = (Profile) this.contextselectednode.Parent.Tag;
+            tag2.moveActionDown(tag1);
+            tag2.resetOrder();
+            Program.mainform.updateAfterSaveDelete();
+        }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.components != null)
-        this.components.Dispose();
-      base.Dispose(disposing);
-    }
+        private void editActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionHardware)
+            this.loadActionHardwareForm((Profile) this.contextselectednode.Parent.Tag, (ActionHardware) this.contextselectednode.Tag);
+            else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionService)
+            this.loadActionServiceForm((Profile) this.contextselectednode.Parent.Tag, (ActionService) this.contextselectednode.Tag);
+            else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionProcess)
+            {
+            this.loadActionProcessForm((Profile) this.contextselectednode.Parent.Tag, (ActionProcess) this.contextselectednode.Tag);
+            }
+            else if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionExecutable)
+            {
+            this.loadActionExecutableForm((Profile)this.contextselectednode.Parent.Tag, (ActionExecutable)this.contextselectednode.Tag);
+            }
+            else
+            {
+            if (this.contextselectednode.Tag == null || !(this.contextselectednode.Tag is ActionProfile))
+                return;
+            this.loadActionProfileForm((Profile) this.contextselectednode.Parent.Tag, (ActionProfile) this.contextselectednode.Tag);
+            }
+        }
 
-    private void InitializeComponent()
-    {
+        private void deleteActionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Delete action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            return;
+            if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionHardware)
+            {
+            ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionService)
+            {
+            ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionProcess)
+            {
+            ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.contextselectednode.Tag != null && this.contextselectednode.Tag is ActionExecutable)
+            {
+            ((Profile)this.contextselectednode.Parent.Tag).removeAction((Action)this.contextselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.contextselectednode.Tag == null || !(this.contextselectednode.Tag is ActionProfile))
+            return;
+            ((Profile) this.contextselectednode.Parent.Tag).removeAction((Action) this.contextselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+        }
+
+        private void treeProfiles_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            this.toolstripselectednode = this.treeProfiles.SelectedNode;
+            this.resetToolStrip();
+            this.btnProfileAdd.Enabled = false;
+            if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
+            {
+            this.lblProfile.Enabled = true;
+            this.btnProfileRun.Enabled = true;
+            this.btnProfileRevert.Enabled = true;
+            this.btnProfileEdit.Enabled = true;
+            this.btnProfileDelete.Enabled = true;
+            this.lblAction.Enabled = true;
+            this.lblActionAdd.Enabled = true;
+            }
+            else
+            {
+            if (this.treeProfiles.SelectedNode.Tag == null || !(this.treeProfiles.SelectedNode.Tag is Action))
+                return;
+            this.lblAction.Enabled = true;
+            this.lblActionMoveUp.Enabled = true;
+            this.lblActionMoveDown.Enabled = true;
+            this.lblActionEdit.Enabled = true;
+            this.lblActionDelete.Enabled = true;
+            }
+        }
+
+        private void resetToolStrip()
+        {
+            this.lblProfile.Enabled = true;
+            this.btnProfileAdd.Enabled = true;
+            this.btnProfileRun.Enabled = false;
+            this.btnProfileRevert.Enabled = false;
+            this.btnProfileEdit.Enabled = false;
+            this.btnProfileDelete.Enabled = false;
+            this.lblAction.Enabled = false;
+            this.lblActionAdd.Enabled = false;
+            this.lblActionMoveUp.Enabled = false;
+            this.lblActionMoveDown.Enabled = false;
+            this.lblActionEdit.Enabled = false;
+            this.lblActionDelete.Enabled = false;
+        }
+
+        private void treeProfiles_Leave(object sender, EventArgs e)
+        {
+            if (this.treeProfiles.SelectedNode != null)
+            return;
+            this.resetToolStrip();
+        }
+
+        private void treeProfiles_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.treeProfiles.SelectedNode == null)
+            return;
+            if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is Profile)
+            this.loadProfileForm((Profile) this.treeProfiles.SelectedNode.Tag);
+            else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionHardware)
+            this.loadActionHardwareForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionHardware) this.treeProfiles.SelectedNode.Tag);
+            else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionService)
+            this.loadActionServiceForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionService) this.treeProfiles.SelectedNode.Tag);
+            else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionProcess)
+            this.loadActionProcessForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionProcess) this.treeProfiles.SelectedNode.Tag);
+            else if (this.treeProfiles.SelectedNode.Tag != null && this.treeProfiles.SelectedNode.Tag is ActionExecutable)
+            this.loadActionExecutableForm((Profile)this.treeProfiles.SelectedNode.Parent.Tag, (ActionExecutable)this.treeProfiles.SelectedNode.Tag);
+            else
+            {
+            if (this.treeProfiles.SelectedNode.Tag == null || !(this.treeProfiles.SelectedNode.Tag is ActionProfile))
+                return;
+            this.loadActionProfileForm((Profile) this.treeProfiles.SelectedNode.Parent.Tag, (ActionProfile) this.treeProfiles.SelectedNode.Tag);
+            }
+        }
+
+        private void btnProfileAdd_Click(object sender, EventArgs e)
+        {
+            this.loadProfileForm();
+            this.resetToolStrip();
+        }
+
+        private void btnProfileRun_Click(object sender, EventArgs e)
+        {
+            Profile tag = (Profile) this.toolstripselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.toolstripselectednode;
+            tag.run();
+        }
+
+        private void btnProfileRevert_Click(object sender, EventArgs e)
+        {
+            Profile tag = (Profile) this.toolstripselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.toolstripselectednode;
+            tag.revert();
+        }
+
+        private void btnProfileEdit_Click(object sender, EventArgs e)
+        {
+            if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Profile))
+            return;
+            Profile tag = (Profile) this.toolstripselectednode.Tag;
+            this.loadProfileForm(tag);
+            this.setTreeSelectedProfile(tag);
+        }
+
+        private void btnProfileDelete_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Delete profile?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            return;
+            Profile tag = (Profile) this.toolstripselectednode.Tag;
+            Program.profilelist.removeProfile(tag);
+            Program.mainform.updateAfterSaveDelete();
+            this.resetToolStrip();
+            this.setTreeSelectedProfile(tag);
+        }
+
+        private void lblActionAdd_Click(object sender, EventArgs e)
+        {
+            if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Profile))
+            return;
+            Profile tag = (Profile) this.toolstripselectednode.Tag;
+            this.treeProfiles.SelectedNode = this.contextselectednode;
+            this.loadActionPickerForm(tag);
+        }
+
+        private void lblActionMoveUp_Click(object sender, EventArgs e)
+        {
+            if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Action))
+            return;
+            Action tag1 = (Action) this.toolstripselectednode.Tag;
+            Profile tag2 = (Profile) this.toolstripselectednode.Parent.Tag;
+            tag2.moveActionUp(tag1);
+            tag2.resetOrder();
+            Program.mainform.updateAfterSaveDelete();
+            this.setTreeSelectedAction(tag1);
+        }
+
+        private void lblActionMoveDown_Click(object sender, EventArgs e)
+        {
+            if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is Action))
+            return;
+            Action tag1 = (Action) this.toolstripselectednode.Tag;
+            Profile tag2 = (Profile) this.toolstripselectednode.Parent.Tag;
+            tag2.moveActionDown(tag1);
+            tag2.resetOrder();
+            Program.mainform.updateAfterSaveDelete();
+            this.setTreeSelectedAction(tag1);
+        }
+
+        private void lblActionEdit_Click(object sender, EventArgs e)
+        {
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionHardware)
+            {
+            ActionHardware tag = (ActionHardware) this.toolstripselectednode.Tag;
+            this.loadActionHardwareForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionHardware) this.toolstripselectednode.Tag);
+            this.setTreeSelectedAction((Action) tag);
+            }
+            else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionService)
+            {
+            ActionService tag = (ActionService) this.toolstripselectednode.Tag;
+            this.loadActionServiceForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionService) this.toolstripselectednode.Tag);
+            this.setTreeSelectedAction((Action) tag);
+            }
+            else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProcess)
+            {
+            ActionProcess tag = (ActionProcess) this.toolstripselectednode.Tag;
+            this.loadActionProcessForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionProcess) this.toolstripselectednode.Tag);
+            this.setTreeSelectedAction((Action) tag);
+            }
+            else if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionExecutable)
+            {
+            ActionExecutable tag = (ActionExecutable)this.toolstripselectednode.Tag;
+            this.loadActionExecutableForm((Profile)this.toolstripselectednode.Parent.Tag, (ActionExecutable)this.toolstripselectednode.Tag);
+            this.setTreeSelectedAction((Action)tag);
+            }
+            else
+            {
+            if (this.toolstripselectednode.Tag == null || !(this.toolstripselectednode.Tag is ActionProfile))
+                return;
+            ActionProfile tag = (ActionProfile) this.toolstripselectednode.Tag;
+            this.loadActionProfileForm((Profile) this.toolstripselectednode.Parent.Tag, (ActionProfile) this.toolstripselectednode.Tag);
+            this.setTreeSelectedAction((Action) tag);
+            }
+        }
+
+        private void lblActionDelete_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Delete action?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+            return;
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionHardware)
+            {
+            ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionService)
+            {
+            ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProcess)
+            {
+            ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionExecutable)
+            {
+                ((Profile)this.toolstripselectednode.Parent.Tag).removeAction((Action)this.toolstripselectednode.Tag);
+                Program.mainform.updateAfterSaveDelete();
+            }
+            if (this.toolstripselectednode.Tag != null && this.toolstripselectednode.Tag is ActionProfile)
+            {
+            ((Profile) this.toolstripselectednode.Parent.Tag).removeAction((Action) this.toolstripselectednode.Tag);
+            Program.mainform.updateAfterSaveDelete();
+            }
+            this.resetToolStrip();
+        }
+
+        private void setTreeSelectedAction(Action action)
+        {
+            foreach (TreeNode node1 in this.treeProfiles.Nodes)
+            {
+            foreach (TreeNode node2 in node1.Nodes)
+            {
+                if (node2.Tag == action)
+                this.treeProfiles.SelectedNode = node2;
+            }
+            }
+        }
+
+        public void setTreeSelectedProfile(Profile profile)
+        {
+            foreach (TreeNode node in this.treeProfiles.Nodes)
+            {
+            if (node.Tag == profile)
+                this.treeProfiles.SelectedNode = node;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            this.components.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeProfiles = new System.Windows.Forms.TreeView();
@@ -641,6 +649,9 @@ namespace Whipper_Snipper
             this.editProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewActionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.createShortcutRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createShortcutRevertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.context_action = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aCTIONNAMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -667,10 +678,6 @@ namespace Whipper_Snipper
             this.lblActionMoveDown = new System.Windows.Forms.ToolStripButton();
             this.lblActionEdit = new System.Windows.Forms.ToolStripButton();
             this.lblActionDelete = new System.Windows.Forms.ToolStripButton();
-            this.createShortcutRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createShortcutRevertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveShortcutFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -820,6 +827,27 @@ namespace Whipper_Snipper
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+            // 
+            // createShortcutRunToolStripMenuItem
+            // 
+            this.createShortcutRunToolStripMenuItem.Image = global::Whipper_Snipper.Properties.Resources.icon_shortcut_small;
+            this.createShortcutRunToolStripMenuItem.Name = "createShortcutRunToolStripMenuItem";
+            this.createShortcutRunToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.createShortcutRunToolStripMenuItem.Text = "Create Shortcut (Run)";
+            this.createShortcutRunToolStripMenuItem.Click += new System.EventHandler(this.createShortcutRunToolStripMenuItem_Click);
+            // 
+            // createShortcutRevertToolStripMenuItem
+            // 
+            this.createShortcutRevertToolStripMenuItem.Image = global::Whipper_Snipper.Properties.Resources.icon_shortcut_small;
+            this.createShortcutRevertToolStripMenuItem.Name = "createShortcutRevertToolStripMenuItem";
+            this.createShortcutRevertToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.createShortcutRevertToolStripMenuItem.Text = "Create Shortcut (Revert)";
+            this.createShortcutRevertToolStripMenuItem.Click += new System.EventHandler(this.createShortcutRevertToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(197, 6);
             // 
             // deleteProfileToolStripMenuItem
             // 
@@ -1079,29 +1107,6 @@ namespace Whipper_Snipper
             this.lblActionDelete.Text = "Delete action";
             this.lblActionDelete.Click += new System.EventHandler(this.lblActionDelete_Click);
             // 
-            // createShortcutRunToolStripMenuItem
-            // 
-            this.createShortcutRunToolStripMenuItem.Name = "createShortcutRunToolStripMenuItem";
-            this.createShortcutRunToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.createShortcutRunToolStripMenuItem.Text = "Create Shortcut (Run)";
-            this.createShortcutRunToolStripMenuItem.Click += new System.EventHandler(this.createShortcutRunToolStripMenuItem_Click);
-            // 
-            // createShortcutRevertToolStripMenuItem
-            // 
-            this.createShortcutRevertToolStripMenuItem.Name = "createShortcutRevertToolStripMenuItem";
-            this.createShortcutRevertToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.createShortcutRevertToolStripMenuItem.Text = "Create Shortcut (Revert)";
-            this.createShortcutRevertToolStripMenuItem.Click += new System.EventHandler(this.createShortcutRevertToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(197, 6);
-            // 
-            // saveShortcutFileDialog
-            // 
-            this.saveShortcutFileDialog.Filter = "shortcut files (*.lnk)|*.lnk";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1109,7 +1114,7 @@ namespace Whipper_Snipper
             this.ClientSize = new System.Drawing.Size(1111, 746);
             this.Controls.Add(this.splitContainer2);
             this.Name = "MainForm";
-            this.Text = "Whipper Snipper 1.0";
+            this.Text = "Whipper Snipper";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1128,58 +1133,20 @@ namespace Whipper_Snipper
             this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
 
-    }
+        }
 
         private void createShortcutRunToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Profile tag = (Profile)this.contextselectednode.Tag;
-            this.treeProfiles.SelectedNode = this.contextselectednode;
-
-            saveShortcutFileDialog.FileName = tag.getDispalyName() + " (Run).lnk";
-            if (saveShortcutFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    Program.writeLog("Saving shortcut to " + saveShortcutFileDialog.FileName);
-                    WshShell shell = new WshShell();
-                    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(saveShortcutFileDialog.FileName);
-                    shortcut.Description = "Run Whipper Snipper Profile: " + tag.getDispalyName();
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                    shortcut.Arguments = "-run " + tag.guid;
-                    shortcut.Save();
-                }
-                catch(Exception ex)
-                {
-                    Program.writeLogError("Error saving shortcut");
-                    Program.writeLogError(ex.Message);
-                }              
-            }
+            this.treeProfiles.SelectedNode = this.contextselectednode;            
+            this.loadProfileShortcutForm(tag,true);            
         }
 
         private void createShortcutRevertToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Profile tag = (Profile)this.contextselectednode.Tag;
             this.treeProfiles.SelectedNode = this.contextselectednode;
-
-            saveShortcutFileDialog.FileName = tag.getDispalyName() + " (Revert).lnk";
-            if (saveShortcutFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    Program.writeLog("Saving shortcut to " + saveShortcutFileDialog.FileName);
-                    WshShell shell = new WshShell();
-                    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(saveShortcutFileDialog.FileName);
-                    shortcut.Description = "Run Whipper Snipper Profile: " + tag.getDispalyName();
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                    shortcut.Arguments = "-revert " + tag.guid;
-                    shortcut.Save();
-                }
-                catch (Exception ex)
-                {
-                    Program.writeLogError("Error saving shortcut");
-                    Program.writeLogError(ex.Message);
-                }
-            }
+            this.loadProfileShortcutForm(tag,false);
         }
     }
 }

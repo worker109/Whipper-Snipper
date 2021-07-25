@@ -88,6 +88,8 @@ namespace Whipper_Snipper.Properties
 
     internal static Bitmap icon_service_small => (Bitmap) Whipper_Snipper.Properties.Resources.ResourceManager.GetObject(nameof (icon_service_small), Whipper_Snipper.Properties.Resources.resourceCulture);
 
+    internal static Bitmap icon_shortcut_small => (Bitmap)Whipper_Snipper.Properties.Resources.ResourceManager.GetObject(nameof(icon_shortcut_small), Whipper_Snipper.Properties.Resources.resourceCulture);
+
     internal static Icon wsicon => (Icon) Whipper_Snipper.Properties.Resources.ResourceManager.GetObject(nameof (wsicon), Whipper_Snipper.Properties.Resources.resourceCulture);
   }
 }

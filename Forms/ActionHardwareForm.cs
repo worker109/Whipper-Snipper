@@ -45,8 +45,7 @@ namespace Whipper_Snipper
     }
 
     private void ActionHardwareForm_Load(object sender, EventArgs e)
-    {
-        
+    {        
         this.Icon = Resources.icon_hardware_icon;
         this.FormBorderStyle = FormBorderStyle.FixedSingle;
         this.MaximizeBox = false;

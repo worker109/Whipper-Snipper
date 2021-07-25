@@ -11,6 +11,7 @@
     <FileAlignment>512</FileAlignment>
     <RootNamespace>Whipper_Snipper</RootNamespace>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,10 +23,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>1.1.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +49,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\wsicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -69,6 +72,9 @@
     <Compile Include="Classes\ProcessInfo.cs" />
     <Compile Include="Classes\ProcessController.cs" />
     <Compile Include="Forms\ActionExecutableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProfileShortcutForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ActionProfileForm.cs">
@@ -103,6 +109,11 @@
     <Compile Include="Classes\ServiceController.cs" />
     <Compile Include="Properties\Resources.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\ActionExecutableForm.resx">
@@ -111,8 +122,14 @@
     <EmbeddedResource Include="Forms\ActionPickerForm.resx">
       <DependentUpon>ActionPickerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfileShortcutForm.resx">
+      <DependentUpon>ProfileShortcutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\devcon32.exe" />
     <EmbeddedResource Include="Resources\devcon64.exe" />
     <EmbeddedResource Include="Resources\icon_add.png" />
@@ -170,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_executable_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icon_shortcut_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
