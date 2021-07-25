@@ -26,7 +26,7 @@ Whipper Snipper is portable and doesn't use an installer**
 
 # Examples
 
-## 1. Application that use an always running service
+## 1. Applications that use an always running service
 
 Some applications have a dedicated background service, if this service is only required when using the application you may not want it to run all the time.
 
@@ -50,7 +50,7 @@ Use the 'Revert Profile' option to end the application (this will also kill the 
 
 ![01-ws_service_example](https://user-images.githubusercontent.com/77418705/126892419-27be543c-e204-4a6f-863c-3fe5758a2e6b.png)
 
-## 2. Application that use specific hardware
+## 2. Applications that use specific hardware
 
 You may have a hardware device that's only needed for some applications.
 
