@@ -26,7 +26,7 @@ Whipper Snipper is portable and doesn't use an installer**
 
 # Examples
 
-## 1. Application that uses an always running service
+## 1. Application that use an always running service
 
 Some applications have a dedicated background service, if this service is only required when using the application you may not want it to run all the time.
 
@@ -39,7 +39,7 @@ Steps:
    - Choose 'Stop' for the revert action
    - Optionally choose 'Manual' for either the enable or revert action startup type. This will ensure the service won't start automatically (after the profile has been run or reverted at least once). You can also do this separately via services.msc in Windows
 3. Add an 'Executable' action
-   - Find the execitable path by using 'Browse'
+   - Find the executable path by using 'Browse'
    - Choose 'Start' for the enable action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
@@ -62,7 +62,7 @@ Steps:
    - Choose 'Enable' for the enable action
    - Choose 'Disable' for the revert action
 3. Add an 'Executable' action
-   - Find the execitable path by using 'Browse'
+   - Find the executable path by using 'Browse'
    - Choose 'Start' for the enable action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
