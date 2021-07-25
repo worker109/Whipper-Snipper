@@ -18,9 +18,11 @@ This application requires administrator privileges. You can break things with it
 
 # Download and Installation
 
-Whipper Snipper is portable and doesn't use an installer.
+Whipper Snipper is portable* and doesn't use an installer.
 
 [Download Version 1.1 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.1/WhipperSnipper.exe)
+
+* *If you use shortcuts generated from Whipper Snipper, put the application somewhere permanent*
 
 # Examples
 
@@ -71,7 +73,7 @@ Use the 'Revert Profile' option to end the application (this will also disable t
 
 ![02-ws_hardware_example](https://user-images.githubusercontent.com/77418705/126892456-b6407c13-1348-4756-b523-c10124284232.png)
 
-## 3. Notoriously cumbersome applications
+## 3. Notoriously cumbersome software
 
 E.g. Adobe products.
 
