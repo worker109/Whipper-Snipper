@@ -35,12 +35,12 @@ Steps:
 1. Create a new profile
 2. Add a 'Service' action
    - Choose the service from the list
-   - Choose 'Start' for the enable action
+   - Choose 'Start' for the run action
    - Choose 'Stop' for the revert action
-   - Optionally choose 'Manual' for either the enable or revert action startup type. This will ensure the service won't start automatically (after the profile has been run or reverted at least once). You can also do this separately via services.msc in Windows
+   - Optionally choose 'Manual' for either the run or revert action startup type. This will ensure the service won't start automatically (after the profile has been run or reverted at least once). You can also do this separately via services.msc in Windows
 3. Add an 'Executable' action
    - Find the executable path by using 'Browse'
-   - Choose 'Start' for the enable action
+   - Choose 'Start' for the run action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
 
@@ -59,11 +59,11 @@ Steps:
 1. Create a new profile
 2. Add a 'Hardware' action
    - Choose the device from the list
-   - Choose 'Enable' for the enable action
+   - Choose 'Enable' for the run action
    - Choose 'Disable' for the revert action
 3. Add an 'Executable' action
    - Find the executable path by using 'Browse'
-   - Choose 'Start' for the enable action
+   - Choose 'Start' for the run action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
 
