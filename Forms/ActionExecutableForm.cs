@@ -163,9 +163,9 @@ namespace Whipper_Snipper
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 87);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.Size = new System.Drawing.Size(92, 13);
             this.label7.TabIndex = 26;
-            this.label7.Text = "Enable Profile Action";
+            this.label7.Text = "Run Profile Action";
             // 
             // cboEnableAction
             // 

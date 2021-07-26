@@ -165,155 +165,210 @@ namespace Whipper_Snipper
 
     private void InitializeComponent()
     {
-      this.label6 = new Label();
-      this.cboRevertAction = new ComboBox();
-      this.label7 = new Label();
-      this.cboEnableAction = new ComboBox();
-      this.label4 = new Label();
-      this.cboRevertStartup = new ComboBox();
-      this.label5 = new Label();
-      this.cboEnableStartup = new ComboBox();
-      this.txtServiceName = new TextBox();
-      this.label3 = new Label();
-      this.label2 = new Label();
-      this.btnDelete = new Button();
-      this.btnSave = new Button();
-      this.btnCancel = new Button();
-      this.cboService = new ComboBox();
-      this.txtFriendlyName = new TextBox();
-      this.label1 = new Label();
-      this.SuspendLayout();
-      this.label6.AutoSize = true;
-      this.label6.Location = new Point(11, 204);
-      this.label6.Name = "label6";
-      this.label6.Size = new Size(104, 13);
-      this.label6.TabIndex = 28;
-      this.label6.Text = "Revert Profile Action";
-      this.cboRevertAction.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboRevertAction.FormattingEnabled = true;
-      this.cboRevertAction.Location = new Point(14, 220);
-      this.cboRevertAction.Name = "cboRevertAction";
-      this.cboRevertAction.Size = new Size(237, 21);
-      this.cboRevertAction.TabIndex = 27;
-      this.label7.AutoSize = true;
-      this.label7.Location = new Point(11, 126);
-      this.label7.Name = "label7";
-      this.label7.Size = new Size(105, 13);
-      this.label7.TabIndex = 26;
-      this.label7.Text = "Enable Profile Action";
-      this.cboEnableAction.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboEnableAction.FormattingEnabled = true;
-      this.cboEnableAction.Location = new Point(14, 141);
-      this.cboEnableAction.Name = "cboEnableAction";
-      this.cboEnableAction.Size = new Size(237, 21);
-      this.cboEnableAction.TabIndex = 25;
-      this.label4.AutoSize = true;
-      this.label4.Location = new Point(11, 244);
-      this.label4.Name = "label4";
-      this.label4.Size = new Size(174, 13);
-      this.label4.TabIndex = 24;
-      this.label4.Text = "Revert Profile Action (Startup Type)";
-      this.cboRevertStartup.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboRevertStartup.FormattingEnabled = true;
-      this.cboRevertStartup.Location = new Point(14, 260);
-      this.cboRevertStartup.Name = "cboRevertStartup";
-      this.cboRevertStartup.Size = new Size(237, 21);
-      this.cboRevertStartup.TabIndex = 23;
-      this.label5.AutoSize = true;
-      this.label5.Location = new Point(11, 165);
-      this.label5.Name = "label5";
-      this.label5.Size = new Size(175, 13);
-      this.label5.TabIndex = 22;
-      this.label5.Text = "Enable Profile Action (Startup Type)";
-      this.label5.Click += new EventHandler(this.label5_Click);
-      this.cboEnableStartup.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboEnableStartup.FormattingEnabled = true;
-      this.cboEnableStartup.Location = new Point(14, 180);
-      this.cboEnableStartup.Name = "cboEnableStartup";
-      this.cboEnableStartup.Size = new Size(237, 21);
-      this.cboEnableStartup.TabIndex = 21;
-      this.txtServiceName.Location = new Point(15, 103);
-      this.txtServiceName.Name = "txtServiceName";
-      this.txtServiceName.ReadOnly = true;
-      this.txtServiceName.Size = new Size(237, 20);
-      this.txtServiceName.TabIndex = 17;
-      this.label3.AutoSize = true;
-      this.label3.Location = new Point(12, 87);
-      this.label3.Name = "label3";
-      this.label3.Size = new Size(43, 13);
-      this.label3.TabIndex = 15;
-      this.label3.Text = "Service";
-      this.label2.AutoSize = true;
-      this.label2.Location = new Point(12, 48);
-      this.label2.Name = "label2";
-      this.label2.Size = new Size(74, 13);
-      this.label2.TabIndex = 12;
-      this.label2.Text = "Service Name";
-      this.btnDelete.Location = new Point(176, 299);
-      this.btnDelete.Name = "btnDelete";
-      this.btnDelete.Size = new Size(75, 23);
-      this.btnDelete.TabIndex = 11;
-      this.btnDelete.Text = "Delete";
-      this.btnDelete.UseVisualStyleBackColor = true;
-      this.btnDelete.Click += new EventHandler(this.btnDelete_Click_1);
-      this.btnSave.ImageKey = "(none)";
-      this.btnSave.Location = new Point(14, 299);
-      this.btnSave.Name = "btnSave";
-      this.btnSave.Size = new Size(75, 23);
-      this.btnSave.TabIndex = 9;
-      this.btnSave.Text = "Save";
-      this.btnSave.UseVisualStyleBackColor = true;
-      this.btnSave.Click += new EventHandler(this.btnSave_Click_1);
-      this.btnCancel.Location = new Point(95, 299);
-      this.btnCancel.Name = "btnCancel";
-      this.btnCancel.Size = new Size(75, 23);
-      this.btnCancel.TabIndex = 10;
-      this.btnCancel.Text = "Cancel";
-      this.btnCancel.UseVisualStyleBackColor = true;
-      this.btnCancel.Click += new EventHandler(this.btnCancel_Click);
-      this.cboService.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboService.FormattingEnabled = true;
-      this.cboService.Location = new Point(15, 63);
-      this.cboService.Name = "cboService";
-      this.cboService.Size = new Size(237, 21);
-      this.cboService.TabIndex = 7;
-      this.cboService.SelectedIndexChanged += new EventHandler(this.cboService_SelectedIndexChanged);
-      this.txtFriendlyName.Location = new Point(15, 25);
-      this.txtFriendlyName.Name = "txtFriendlyName";
-      this.txtFriendlyName.Size = new Size(237, 20);
-      this.txtFriendlyName.TabIndex = 3;
-      this.label1.AutoSize = true;
-      this.label1.Location = new Point(12, 9);
-      this.label1.Name = "label1";
-      this.label1.Size = new Size(118, 13);
-      this.label1.TabIndex = 2;
-      this.label1.Text = "Friendly name (optional)";
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.ClientSize = new Size(268, 341);
-      this.Controls.Add((Control) this.label6);
-      this.Controls.Add((Control) this.cboRevertAction);
-      this.Controls.Add((Control) this.label1);
-      this.Controls.Add((Control) this.label7);
-      this.Controls.Add((Control) this.txtFriendlyName);
-      this.Controls.Add((Control) this.cboEnableAction);
-      this.Controls.Add((Control) this.cboService);
-      this.Controls.Add((Control) this.label4);
-      this.Controls.Add((Control) this.btnCancel);
-      this.Controls.Add((Control) this.cboRevertStartup);
-      this.Controls.Add((Control) this.btnSave);
-      this.Controls.Add((Control) this.label5);
-      this.Controls.Add((Control) this.btnDelete);
-      this.Controls.Add((Control) this.cboEnableStartup);
-      this.Controls.Add((Control) this.label2);
-      this.Controls.Add((Control) this.txtServiceName);
-      this.Controls.Add((Control) this.label3);
-      this.Name = "ActionServiceForm";
-      this.StartPosition = FormStartPosition.CenterParent;
-      this.Text = "ActionServiceForm";
-      this.Load += new EventHandler(this.ActionServiceForm_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboRevertAction = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cboEnableAction = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboRevertStartup = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboEnableStartup = new System.Windows.Forms.ComboBox();
+            this.txtServiceName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.cboService = new System.Windows.Forms.ComboBox();
+            this.txtFriendlyName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 204);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Revert Profile Action";
+            // 
+            // cboRevertAction
+            // 
+            this.cboRevertAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRevertAction.FormattingEnabled = true;
+            this.cboRevertAction.Location = new System.Drawing.Point(14, 220);
+            this.cboRevertAction.Name = "cboRevertAction";
+            this.cboRevertAction.Size = new System.Drawing.Size(237, 21);
+            this.cboRevertAction.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 126);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Run Profile Action";
+            // 
+            // cboEnableAction
+            // 
+            this.cboEnableAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEnableAction.FormattingEnabled = true;
+            this.cboEnableAction.Location = new System.Drawing.Point(14, 141);
+            this.cboEnableAction.Name = "cboEnableAction";
+            this.cboEnableAction.Size = new System.Drawing.Size(237, 21);
+            this.cboEnableAction.TabIndex = 25;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 244);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(174, 13);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Revert Profile Action (Startup Type)";
+            // 
+            // cboRevertStartup
+            // 
+            this.cboRevertStartup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRevertStartup.FormattingEnabled = true;
+            this.cboRevertStartup.Location = new System.Drawing.Point(14, 260);
+            this.cboRevertStartup.Name = "cboRevertStartup";
+            this.cboRevertStartup.Size = new System.Drawing.Size(237, 21);
+            this.cboRevertStartup.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 165);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(162, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Run Profile Action (Startup Type)";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // cboEnableStartup
+            // 
+            this.cboEnableStartup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEnableStartup.FormattingEnabled = true;
+            this.cboEnableStartup.Location = new System.Drawing.Point(14, 180);
+            this.cboEnableStartup.Name = "cboEnableStartup";
+            this.cboEnableStartup.Size = new System.Drawing.Size(237, 21);
+            this.cboEnableStartup.TabIndex = 21;
+            // 
+            // txtServiceName
+            // 
+            this.txtServiceName.Location = new System.Drawing.Point(15, 103);
+            this.txtServiceName.Name = "txtServiceName";
+            this.txtServiceName.ReadOnly = true;
+            this.txtServiceName.Size = new System.Drawing.Size(237, 20);
+            this.txtServiceName.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Service";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Service Name";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(176, 299);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 11;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
+            // 
+            // btnSave
+            // 
+            this.btnSave.ImageKey = "(none)";
+            this.btnSave.Location = new System.Drawing.Point(14, 299);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 9;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(95, 299);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // cboService
+            // 
+            this.cboService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboService.FormattingEnabled = true;
+            this.cboService.Location = new System.Drawing.Point(15, 63);
+            this.cboService.Name = "cboService";
+            this.cboService.Size = new System.Drawing.Size(237, 21);
+            this.cboService.TabIndex = 7;
+            this.cboService.SelectedIndexChanged += new System.EventHandler(this.cboService_SelectedIndexChanged);
+            // 
+            // txtFriendlyName
+            // 
+            this.txtFriendlyName.Location = new System.Drawing.Point(15, 25);
+            this.txtFriendlyName.Name = "txtFriendlyName";
+            this.txtFriendlyName.Size = new System.Drawing.Size(237, 20);
+            this.txtFriendlyName.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Friendly name (optional)";
+            // 
+            // ActionServiceForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(268, 341);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cboRevertAction);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtFriendlyName);
+            this.Controls.Add(this.cboEnableAction);
+            this.Controls.Add(this.cboService);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.cboRevertStartup);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.cboEnableStartup);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtServiceName);
+            this.Controls.Add(this.label3);
+            this.Name = "ActionServiceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "ActionServiceForm";
+            this.Load += new System.EventHandler(this.ActionServiceForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
   }
 }

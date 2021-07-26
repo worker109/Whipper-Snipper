@@ -134,120 +134,163 @@ namespace Whipper_Snipper
 
     private void InitializeComponent()
     {
-      this.label6 = new Label();
-      this.cboRevertAction = new ComboBox();
-      this.label7 = new Label();
-      this.cboEnableAction = new ComboBox();
-      this.txtProcessPath = new TextBox();
-      this.label3 = new Label();
-      this.label2 = new Label();
-      this.btnDelete = new Button();
-      this.btnSave = new Button();
-      this.btnCancel = new Button();
-      this.cboProcessName = new ComboBox();
-      this.txtFriendlyName = new TextBox();
-      this.label1 = new Label();
-      this.SuspendLayout();
-      this.label6.AutoSize = true;
-      this.label6.Location = new Point(11, 165);
-      this.label6.Name = "label6";
-      this.label6.Size = new Size(104, 13);
-      this.label6.TabIndex = 28;
-      this.label6.Text = "Revert Profile Action";
-      this.cboRevertAction.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboRevertAction.FormattingEnabled = true;
-      this.cboRevertAction.Location = new Point(14, 181);
-      this.cboRevertAction.Name = "cboRevertAction";
-      this.cboRevertAction.Size = new Size(237, 21);
-      this.cboRevertAction.TabIndex = 27;
-      this.label7.AutoSize = true;
-      this.label7.Location = new Point(11, 126);
-      this.label7.Name = "label7";
-      this.label7.Size = new Size(105, 13);
-      this.label7.TabIndex = 26;
-      this.label7.Text = "Enable Profile Action";
-      this.cboEnableAction.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.cboEnableAction.FormattingEnabled = true;
-      this.cboEnableAction.Location = new Point(14, 141);
-      this.cboEnableAction.Name = "cboEnableAction";
-      this.cboEnableAction.Size = new Size(237, 21);
-      this.cboEnableAction.TabIndex = 25;
-      this.txtProcessPath.Location = new Point(15, 103);
-      this.txtProcessPath.Name = "txtProcessPath";
-      this.txtProcessPath.Size = new Size(237, 20);
-      this.txtProcessPath.TabIndex = 17;
-      this.label3.AutoSize = true;
-      this.label3.Location = new Point(12, 87);
-      this.label3.Name = "label3";
-      this.label3.Size = new Size(70, 13);
-      this.label3.TabIndex = 15;
-      this.label3.Text = "Process Path";
-      this.label2.AutoSize = true;
-      this.label2.Location = new Point(12, 48);
-      this.label2.Name = "label2";
-      this.label2.Size = new Size(76, 13);
-      this.label2.TabIndex = 12;
-      this.label2.Text = "Process Name";
-      this.btnDelete.Location = new Point(176, 222);
-      this.btnDelete.Name = "btnDelete";
-      this.btnDelete.Size = new Size(75, 23);
-      this.btnDelete.TabIndex = 11;
-      this.btnDelete.Text = "Delete";
-      this.btnDelete.UseVisualStyleBackColor = true;
-      this.btnDelete.Click += new EventHandler(this.btnDelete_Click_1);
-      this.btnSave.ImageKey = "(none)";
-      this.btnSave.Location = new Point(14, 222);
-      this.btnSave.Name = "btnSave";
-      this.btnSave.Size = new Size(75, 23);
-      this.btnSave.TabIndex = 9;
-      this.btnSave.Text = "Save";
-      this.btnSave.UseVisualStyleBackColor = true;
-      this.btnSave.Click += new EventHandler(this.btnSave_Click_1);
-      this.btnCancel.Location = new Point(95, 222);
-      this.btnCancel.Name = "btnCancel";
-      this.btnCancel.Size = new Size(75, 23);
-      this.btnCancel.TabIndex = 10;
-      this.btnCancel.Text = "Cancel";
-      this.btnCancel.UseVisualStyleBackColor = true;
-      this.btnCancel.Click += new EventHandler(this.btnCancel_Click);
-      this.cboProcessName.FormattingEnabled = true;
-      this.cboProcessName.Location = new Point(15, 63);
-      this.cboProcessName.Name = "cboProcessName";
-      this.cboProcessName.Size = new Size(237, 21);
-      this.cboProcessName.TabIndex = 7;
-      this.cboProcessName.SelectedIndexChanged += new EventHandler(this.cboProcess_SelectedIndexChanged);
-      this.txtFriendlyName.Location = new Point(15, 25);
-      this.txtFriendlyName.Name = "txtFriendlyName";
-      this.txtFriendlyName.Size = new Size(237, 20);
-      this.txtFriendlyName.TabIndex = 3;
-      this.label1.AutoSize = true;
-      this.label1.Location = new Point(12, 9);
-      this.label1.Name = "label1";
-      this.label1.Size = new Size(118, 13);
-      this.label1.TabIndex = 2;
-      this.label1.Text = "Friendly name (optional)";
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.ClientSize = new Size(264, 261);
-      this.Controls.Add((Control) this.label6);
-      this.Controls.Add((Control) this.cboRevertAction);
-      this.Controls.Add((Control) this.label1);
-      this.Controls.Add((Control) this.label7);
-      this.Controls.Add((Control) this.txtFriendlyName);
-      this.Controls.Add((Control) this.cboEnableAction);
-      this.Controls.Add((Control) this.cboProcessName);
-      this.Controls.Add((Control) this.txtProcessPath);
-      this.Controls.Add((Control) this.btnCancel);
-      this.Controls.Add((Control) this.label3);
-      this.Controls.Add((Control) this.btnSave);
-      this.Controls.Add((Control) this.label2);
-      this.Controls.Add((Control) this.btnDelete);
-      this.Name = "ActionProcessForm";
-      this.StartPosition = FormStartPosition.CenterParent;
-      this.Text = "Process";
-      this.Load += new EventHandler(this.ActionProcessForm_Load);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboRevertAction = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cboEnableAction = new System.Windows.Forms.ComboBox();
+            this.txtProcessPath = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.cboProcessName = new System.Windows.Forms.ComboBox();
+            this.txtFriendlyName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 165);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Revert Profile Action";
+            // 
+            // cboRevertAction
+            // 
+            this.cboRevertAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRevertAction.FormattingEnabled = true;
+            this.cboRevertAction.Location = new System.Drawing.Point(14, 181);
+            this.cboRevertAction.Name = "cboRevertAction";
+            this.cboRevertAction.Size = new System.Drawing.Size(237, 21);
+            this.cboRevertAction.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 126);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Run Profile Action";
+            // 
+            // cboEnableAction
+            // 
+            this.cboEnableAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEnableAction.FormattingEnabled = true;
+            this.cboEnableAction.Location = new System.Drawing.Point(14, 141);
+            this.cboEnableAction.Name = "cboEnableAction";
+            this.cboEnableAction.Size = new System.Drawing.Size(237, 21);
+            this.cboEnableAction.TabIndex = 25;
+            // 
+            // txtProcessPath
+            // 
+            this.txtProcessPath.Location = new System.Drawing.Point(15, 103);
+            this.txtProcessPath.Name = "txtProcessPath";
+            this.txtProcessPath.Size = new System.Drawing.Size(237, 20);
+            this.txtProcessPath.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Process Path";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Process Name";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(176, 222);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 11;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
+            // 
+            // btnSave
+            // 
+            this.btnSave.ImageKey = "(none)";
+            this.btnSave.Location = new System.Drawing.Point(14, 222);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 9;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(95, 222);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // cboProcessName
+            // 
+            this.cboProcessName.FormattingEnabled = true;
+            this.cboProcessName.Location = new System.Drawing.Point(15, 63);
+            this.cboProcessName.Name = "cboProcessName";
+            this.cboProcessName.Size = new System.Drawing.Size(237, 21);
+            this.cboProcessName.TabIndex = 7;
+            this.cboProcessName.SelectedIndexChanged += new System.EventHandler(this.cboProcess_SelectedIndexChanged);
+            // 
+            // txtFriendlyName
+            // 
+            this.txtFriendlyName.Location = new System.Drawing.Point(15, 25);
+            this.txtFriendlyName.Name = "txtFriendlyName";
+            this.txtFriendlyName.Size = new System.Drawing.Size(237, 20);
+            this.txtFriendlyName.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Friendly name (optional)";
+            // 
+            // ActionProcessForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(264, 261);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cboRevertAction);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtFriendlyName);
+            this.Controls.Add(this.cboEnableAction);
+            this.Controls.Add(this.cboProcessName);
+            this.Controls.Add(this.txtProcessPath);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnDelete);
+            this.Name = "ActionProcessForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Process";
+            this.Load += new System.EventHandler(this.ActionProcessForm_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
     }
   }
 }

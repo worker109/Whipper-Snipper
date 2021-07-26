@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{355DEA78-214E-4977-A732-52CE57CBD375}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>Whipper Snipper</AssemblyName>
+    <AssemblyName>WhipperSnipper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>Whipper_Snipper</RootNamespace>
@@ -119,8 +119,17 @@
     <EmbeddedResource Include="Forms\ActionExecutableForm.resx">
       <DependentUpon>ActionExecutableForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionHardwareForm.resx">
+      <DependentUpon>ActionHardwareForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionPickerForm.resx">
       <DependentUpon>ActionPickerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionProcessForm.resx">
+      <DependentUpon>ActionProcessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionServiceForm.resx">
+      <DependentUpon>ActionServiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileShortcutForm.resx">
       <DependentUpon>ProfileShortcutForm.cs</DependentUpon>
