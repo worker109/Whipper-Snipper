@@ -1,1 +1,5 @@
-- comments (i lost my original source and created this via decompiling)
+- Comments (i lost my original source and created this via decompiling)
+- Add option for minimise to tray
+  - Add context menu to tray
+    - Exit   
+    - Run/Revert for each profile (or user-chosen profiles)
