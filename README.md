@@ -12,19 +12,21 @@ Actions are contained within a Profile, Profiles can be either run or reverted.
 
 Shortcuts can be created for each Profile (run/revert).
 
-# Download and Installation
-
-Whipper Snipper is portable and doesn't use an installer.
-
-[Download Version 1.1 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.1/WhipperSnipper.exe)
-
 # Warning
 
 This application requires administrator privileges. You can break things with it.
 
+# Download and Installation
+
+Whipper Snipper is portable and doesn't use an installer**
+
+[Download Version 1.1 (Windows)](https://github.com/worker109/Whipper-Snipper/releases/download/1.1/WhipperSnipper.exe)
+
+** *If you use shortcuts generated from Whipper Snipper, put the exe somewhere permanent*
+
 # Examples
 
-## Application that uses an always running service
+## 1. Applications that use an always running service
 
 Some applications have a dedicated background service, if this service is only required when using the application you may not want it to run all the time.
 
@@ -37,7 +39,7 @@ Steps:
    - Choose 'Stop' for the revert action
    - Optionally choose 'Manual' for either the enable or revert action startup type. This will ensure the service won't start automatically (after the profile has been run or reverted at least once). You can also do this separately via services.msc in Windows
 3. Add an 'Executable' action
-   - Find the execitable path by using 'Browse'
+   - Find the executable path by using 'Browse'
    - Choose 'Start' for the enable action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
@@ -48,7 +50,7 @@ Use the 'Revert Profile' option to end the application (this will also kill the 
 
 ![01-ws_service_example](https://user-images.githubusercontent.com/77418705/126892419-27be543c-e204-4a6f-863c-3fe5758a2e6b.png)
 
-## Application that use specific hardware
+## 2. Applications that use specific hardware
 
 You may have a hardware device that's only needed for some applications.
 
@@ -60,7 +62,7 @@ Steps:
    - Choose 'Enable' for the enable action
    - Choose 'Disable' for the revert action
 3. Add an 'Executable' action
-   - Find the execitable path by using 'Browse'
+   - Find the executable path by using 'Browse'
    - Choose 'Start' for the enable action
    - Choose 'Kill' for the revert action
 4. (Optional) Create shortcuts for each action
@@ -71,7 +73,7 @@ Use the 'Revert Profile' option to end the application (this will also disable t
 
 ![02-ws_hardware_example](https://user-images.githubusercontent.com/77418705/126892456-b6407c13-1348-4756-b523-c10124284232.png)
 
-## Notoriously cumbersome applications
+## 3. Notoriously cumbersome software
 
 E.g. Adobe products.
 
@@ -88,7 +90,7 @@ Use the run/revert actions as needed for each application
 
 ![03-ws_adobe](https://user-images.githubusercontent.com/77418705/126892422-274e4e22-b6c0-4844-8330-6143b7ae9733.png)
 
-## Offline mode
+## 4. Offline mode
 
 Use a combination of services, hardware and process actions to create an offline/online profile.
 
@@ -96,7 +98,7 @@ E.g. disable NIC's and any services used for networking, then re-enable when bac
 
 ![04-ws-offline-mode](https://user-images.githubusercontent.com/77418705/126892423-12b0feac-b306-4065-a88e-ec046936ff3a.png)
 
-## Gaming mode
+## 5. Gaming mode
 
 Use a combination of services, hardware and process actions to create a custom gaming profile. If your game is offline you can also add the previous "Offline mode" profile example as a sub-profile.
 
